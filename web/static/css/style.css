@@ -1,0 +1,215 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f0f4f8;
+    color: #333;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    height: 100vh;
+}
+
+/* ---------- Left panel ---------- */
+#sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: #f7f9fb;
+    border-right: 1px solid #d0d7de;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sidebar h1 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+}
+
+#sidebar .subtitle {
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.group {
+    background: #fff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+
+.group h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+/* Slider row */
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.slider-row label {
+    font-size: 11px;
+    width: 72px;
+    min-width: 72px;
+    color: #444;
+}
+
+.slider-row input[type="range"] {
+    flex: 1;
+    accent-color: #4682b4;
+    height: 4px;
+}
+
+.slider-row .val {
+    font-family: 'Consolas', 'Fira Code', monospace;
+    font-size: 11px;
+    width: 40px;
+    text-align: right;
+    color: #2563eb;
+}
+
+.slider-row input[type="checkbox"] {
+    accent-color: #4682b4;
+}
+
+/* Preset buttons */
+.presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.presets button {
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid #c0c8d0;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.presets button:hover {
+    background: #e8f0fe;
+    border-color: #4682b4;
+    color: #1a1a2e;
+}
+
+/* Color mode select */
+select {
+    width: 100%;
+    padding: 4px 8px;
+    font-size: 11px;
+    border: 1px solid #c0c8d0;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+}
+
+/* Status / metrics */
+#metrics {
+    font-family: 'Consolas', monospace;
+    font-size: 10px;
+    line-height: 1.7;
+    color: #555;
+}
+
+#metrics .value {
+    color: #2563eb;
+}
+
+#metrics .ok {
+    color: #16a34a;
+}
+
+/* ---------- Center: 3D canvas ---------- */
+#canvas-container {
+    flex: 1;
+    position: relative;
+    background: #fff;
+}
+
+#canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* ---------- Colorbar (right side, larger) ---------- */
+#colorbar-wrapper {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    height: 320px;
+}
+
+#colorbar-title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#colorbar {
+    width: 24px;
+    height: 100%;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#colorbar-gradient {
+    width: 100%;
+    height: 100%;
+}
+
+#colorbar-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Consolas', monospace;
+    font-size: 11px;
+    color: #555;
+    padding: 2px 0;
+}
+
+/* ---------- Credits ---------- */
+.credits {
+    font-size: 9px;
+    color: #888;
+    line-height: 1.5;
+    margin-top: auto;
+    padding-top: 6px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.credits a {
+    color: #4682b4;
+    text-decoration: none;
+}

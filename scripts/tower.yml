@@ -1,0 +1,49 @@
+# randomness
+seed: 90  # 90
+# dataset
+generator:
+  name: "tower_ellipse"  # options: tower_ellipse, tower_circle
+  bounds: "twisted"  # options: straight, twisted
+  height: 10.0
+  radius: 2.0
+  num_sides: 16
+  num_levels: 21
+  num_rings: 3  # must be >=3, 2 of them are the top and bottom supports
+# simulator
+fdm:
+  load: 0.0  # 0.0, scale of vertical area load
+# neural networks
+encoder:
+  shift: 1.0  # 1.0
+  hidden_layer_size: 256  # 256
+  hidden_layer_num: 5  # 5
+  activation_fn_name: "elu"
+  final_activation_fn_name: "softplus"  # needs softplus to ensure positive output
+decoder:
+  # If true, the decoder maps (q, boundary conditions) -> x. Otherwise, q -> x.
+  include_params_xl: True
+  hidden_layer_size: 256
+  hidden_layer_num: 5
+  activation_fn_name: "elu"
+# loss function
+loss:
+  shape:
+    include: True  
+    weight: 1.0  # weight of the shape term in the loss function
+  height:
+    include: True
+    weight: 1.0  # weight of the height term in the loss function
+  residual:  # physics term
+    include: True
+    weight: 1.0  # weight of the physics error term in the loss function
+  regularization:
+    include: True
+    weight: 10.0  # weight of the regularization term in the loss function
+# optimization
+optimizer:
+  name: "adam"
+  learning_rate: 0.001  # 0.001 then 0.0001, be careful with scientific notation in YAML!
+  clip_norm: 0.01  # 0.01
+training:
+  steps: 10000
+  batch_size: 16  # 16

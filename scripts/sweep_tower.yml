@@ -1,0 +1,122 @@
+# wandb variables
+program: sweep.py
+project: neural_fdm_tower
+method: grid  # grid, random
+metric:
+  goal: minimize
+  name: loss
+# parameters to be sweeped
+parameters:
+  model:
+    value: "autoencoder"  # Supported models are formfinder, autoencoder, and piggy
+  from_pretrained:
+    value: False
+  # randomness
+  seed:
+    values: [89, 90, 91]
+  # data generator
+  generator:
+    # we need to specify "parameters" again in every nested field of hyperparameters
+    # a wandb sweep would not work otherwise
+    parameters:
+      name:
+        value: "tower_ellipse"  # options: tower_ellipse, tower_circle
+      bounds:
+        value: "twisted"  # options: straight, twisted
+      height:
+        value: 10.0
+      radius:
+        value: 2.0
+      num_sides:
+        value: 16
+      num_levels:
+        value: 21
+      num_rings:
+        value: 3
+  # fd simulation
+  fdm:
+    parameters:
+      load:
+        value: 0.0
+  # encoder
+  encoder:
+    parameters:
+      shift:
+        value: 1.0
+      hidden_layer_size:
+        value: 256
+      hidden_layer_num:
+        value: 5
+      activation_fn_name:
+        value: "elu"
+      final_activation_fn_name:
+        value: "softplus"
+  # decoder
+  decoder:
+    parameters:
+      include_params_xl:
+        value: True
+      hidden_layer_size:
+        value: 256
+      hidden_layer_num:
+        value: 5
+      activation_fn_name:
+        value: "elu"
+  # loss
+  loss:
+    parameters:
+      shape:
+        parameters:
+          include:
+            value: True
+          weight:
+            value: 1.0
+          scale:
+            value: 1.0
+      height:
+        parameters:
+          include:
+            value: True
+          weight:
+            value: 1.0
+          scale:
+            value: 1.0
+      energy:
+        parameters:
+          include:
+            value: False
+          weight:
+            value: 1.0
+          scale:
+            value: 1.0
+      residual:
+        parameters:
+          include:
+            value: True
+          weight:
+            values: [0.01, 0.1, 1.0, 10.0, 100.0]
+          scale:
+            value: 1.0
+      regularization:
+        parameters:
+          include:
+            value: True
+          weight:
+            value: 10.0
+  # optimizer
+  optimizer:
+    parameters:
+      name:
+        value: "adam"
+      learning_rate:
+        # NOTE: Be careful with scientific notation in YAML!
+        value: 0.001
+      clip_norm:
+        value: 0.0
+  # training
+  training:
+    parameters:
+      steps:
+        value: 10000
+      batch_size:
+        value: 16

@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "VAE-FDM: Variational autoencoder for differentiable structural form-finding"
+type: software
+authors:
+  - family-names: Deulofeu
+    given-names: Efrain
+repository-code: "https://github.com/efradeca/vae-fdm"
+license: MIT
+version: "0.1.0"
+date-released: "2026-03-26"
+keywords:
+  - variational-autoencoder
+  - force-density-method
+  - structural-form-finding
+  - differentiable-physics
+  - JAX
+references:
+  - type: conference-paper
+    title: "Real-Time Design of Architectural Structures with Differentiable Mechanics and Neural Networks"
+    authors:
+      - family-names: Pastrana
+        given-names: Rafael
+      - family-names: Medina
+        given-names: Eder
+      - family-names: de Oliveira
+        given-names: Isabel M.
+      - family-names: Adriaenssens
+        given-names: Sigrid
+      - family-names: Adams
+        given-names: Ryan P.
+    collection-title: "International Conference on Learning Representations (ICLR)"
+    year: 2025
+    url: "https://arxiv.org/abs/2409.02606"

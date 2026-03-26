@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neural_fdm"
+version = "0.1.0"
+description = "Differentiable form-finding with graph neural networks for architectural structures"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Rafael Pastrana" }
+]
+keywords = ["structural-engineering", "form-finding", "neural-networks", "jax", "force-density-method"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy<2",
+    "scipy<1.13",
+    "jax==0.4.23",
+    "jaxlib==0.4.23",
+    "equinox==0.11.3",
+    "jax-fdm==0.8.6",
+    "optax==0.1.5",
+    "pyyaml==6.0.1",
+    "tqdm==4.66.1",
+    "fire==0.6.0",
+    "matplotlib>=3.0",
+]
+
+[project.optional-dependencies]
+vis = [
+    "pyvista>=0.43",
+    "pyvistaqt>=0.11",
+    "PySide6>=6.5",
+    "trame",
+    "trame-vtk",
+    "trame-vuetify",
+    "ezdxf>=0.18",
+]
+dev = [
+    "neural_fdm[vis]",
+    "freetype-py",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.4.0",
+    "mypy>=1.0",
+    "pre-commit>=3.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/efradeca/vae-fdm"
+Documentation = "https://github.com/efradeca/vae-fdm#readme"
+Repository = "https://github.com/efradeca/vae-fdm"
+Issues = "https://github.com/efradeca/vae-fdm/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/neural_fdm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "F722",   # jaxtyping annotations (not standard Python)
+    "F821",   # undefined names from jaxtyping
+    "E741",   # ambiguous variable name (l, q are standard in FDM)
+    "F403",   # import * in generators/__init__.py (original paper code)
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]

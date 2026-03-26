@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data artifacts (generated, not tracked)
+data/*.csv
+data/*.dxf
+data/*.obj
+data/*.stl
+data/*.json
+data/*.pdf
+data/*.png
+data/*.txt
+!data/.gitkeep
+
+# Trained models (large binary, not tracked in git)
+data/*.eqx
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Claude (internal development)
+.claude/
+
+# Figures (generated)
+figures/
+
+# JOSS paper (kept separately, not in public repo)
+paper/
+
+# Large files that should never be committed
+*.zip
+*.pdf
+
+# Keep assets for README
+!assets/demo.gif
+!assets/screenshot.png
+# Original paper GIF (not ours)
+masonry_vault_cad_design.gif

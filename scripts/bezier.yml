@@ -1,0 +1,44 @@
+# randomness
+seed: 91  # 91
+# dataset
+generator:
+  # options: "bezier_symmetric_double", "bezier_symmetric", "bezier_asymmetric", "bezier_lerp"
+  name: "bezier_symmetric_double"  # "bezier_symmetric_double"
+  bounds: "saddle"  # options: pillow, dome, saddle
+  num_uv: 10  # 10, 16, 23
+  size: 10.0
+  num_points: 4  # grid points
+  lerp_factor: 0.5  # scalar factor in [0, 1] to interpolate between 2 surfaces, only for bezier_lerp
+# simulator
+fdm:
+  load: -0.5  # -0.5, scale of vertical area load
+# neural networks
+encoder:
+  shift: 0.0
+  hidden_layer_size: 256
+  hidden_layer_num: 3
+  activation_fn_name: "elu"
+  final_activation_fn_name: "softplus"  # needs softplus to ensure positive output
+decoder:
+  # If true, the decoder maps (z, boundary conditions) -> x. Otherwise, z -> x.
+  include_params_xl: True
+  hidden_layer_size: 256
+  hidden_layer_num: 3
+  activation_fn_name: "elu"
+# loss function
+loss:
+  shape:
+    include: True
+    weight: 1.0  # weight of the shape error term in the loss function
+  residual:  # PINN term
+    include: True
+    weight: 1.0  # weight of the residual error term in the loss function
+# optimization
+optimizer:
+  name: "adam"
+  learning_rate: 3.0e-5  # 3.0e-5 (formfinder),  5.0e-5 (others). Be careful with scientific notation in YAML!
+  clip_norm: 0.0
+# training
+training:
+  steps: 10000  # 10000
+  batch_size: 64

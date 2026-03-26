@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAE-FDM Explorer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div id="app">
+    <!-- Left sidebar -->
+    <div id="sidebar">
+        <h1>VAE-FDM Explorer</h1>
+        <div class="subtitle">Differentiable form-finding with neural networks</div>
+
+        <div class="group">
+            <h3>Presets</h3>
+            <div class="presets" id="presets"></div>
+        </div>
+
+        <div class="group">
+            <h3>Control Points</h3>
+            <div class="slider-row">
+                <label style="width:auto; font-size:10px; color:#888;">
+                    <input type="checkbox" id="break-symmetry"> Break symmetry
+                </label>
+            </div>
+            <div id="sliders"></div>
+        </div>
+
+        <div class="group">
+            <h3>Edge Coloring</h3>
+            <select id="color-mode">
+                <option value="q">Force Density (q)</option>
+                <option value="forces">Axial Force (F = q·L)</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <h3>Display</h3>
+            <div class="slider-row">
+                <label>Target mesh</label>
+                <input type="checkbox" id="show-target" checked>
+            </div>
+            <div class="slider-row">
+                <label>Surface</label>
+                <input type="checkbox" id="show-surface" checked>
+            </div>
+            <div class="slider-row">
+                <label>Supports</label>
+                <input type="checkbox" id="show-supports" checked>
+            </div>
+            <div class="slider-row">
+                <label>Control pts</label>
+                <input type="checkbox" id="show-cp" checked>
+            </div>
+        </div>
+
+        <div class="group">
+            <h3>Metrics</h3>
+            <div id="metrics">Loading...</div>
+        </div>
+
+        <div class="credits">
+            VAE-FDM by Efrain Deulofeu<br>
+            Citing: Pastrana et al., ICLR 2025<br>
+            <a href="https://github.com/efradeca/vae-fdm" target="_blank">github.com/efradeca/vae-fdm</a>
+        </div>
+    </div>
+
+    <!-- Center: Three.js canvas -->
+    <div id="canvas-container">
+        <!-- Colorbar: title + gradient + labels -->
+        <div id="colorbar-wrapper">
+            <div id="colorbar-title">Force Density (q)</div>
+            <div id="colorbar">
+                <div id="colorbar-gradient"></div>
+            </div>
+            <div id="colorbar-labels">
+                <span id="cb-max">0</span>
+                <span id="cb-mid1"></span>
+                <span id="cb-zero">0</span>
+                <span id="cb-mid2"></span>
+                <span id="cb-min">0</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+    }
+}
+</script>
+<script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

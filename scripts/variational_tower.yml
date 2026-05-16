@@ -1,0 +1,60 @@
+# Variational Autoencoder for tower form-finding
+# Extension of Pastrana et al. (ICLR 2025), Section 6.1
+#
+# Identical to tower.yml except:
+# - loss.vae section with beta annealing parameters
+# - Used with model name "variational_formfinder"
+
+seed: 90
+
+generator:
+  name: "tower_ellipse"
+  bounds: "twisted"
+  height: 10.0
+  radius: 2.0
+  num_sides: 16
+  num_levels: 21
+  num_rings: 3
+
+fdm:
+  load: 0.0
+
+encoder:
+  shift: 1.0
+  hidden_layer_size: 256
+  hidden_layer_num: 5
+  activation_fn_name: "elu"
+  final_activation_fn_name: "softplus"
+
+decoder:
+  include_params_xl: True
+  hidden_layer_size: 256
+  hidden_layer_num: 5
+  activation_fn_name: "elu"
+
+loss:
+  shape:
+    include: True
+    weight: 1.0
+  height:
+    include: True
+    weight: 1.0
+  residual:
+    include: True
+    weight: 1.0
+  regularization:
+    include: True
+    weight: 10.0
+  vae:
+    beta_max: 0.1
+    cycle_length: 5000
+    warmup_ratio: 0.5
+
+optimizer:
+  name: "adam"
+  learning_rate: 0.001
+  clip_norm: 0.1  # VAE needs moderate clipping (0.01 too aggressive, 0.0 causes KL explosion)
+
+training:
+  steps: 10000
+  batch_size: 16
